@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Contact Mapper with Nested Results for Collection -->
+<mapper namespace="com.mycompany.smarteditor.persistence.ContentsMapper">
+
+    <resultMap id="contentsResultMap" type="Contents">
+        <id property="id" column="ID" />
+        <result property="firstName" column="FIRST_NAME" />
+        <result property="lastName" column="LAST_NAME" />
+        <result property="birthDate" column="BIRTH_DATE" />
+    </resultMap>
+
+    <select id="findAll" resultMap="contentsResultMap">
+        SELECT
+        CONTENT
+        FROM CONTENTS
+    </select>
+
+	<insert id="insertContents" parameterType="Contents">
+		INSERT INTO CONTENTS (CONTENT)
+		VALUES (#{content})
+	</insert>
+    
+</mapper>
