@@ -32,10 +32,6 @@ public class HrController {
 
 		List<Employees> list =  employeesService.findAll();
 		
-		for (Employees employees : list) {
-			System.out.println(employees);
-		}
-		
 		model.addAttribute("employees", list);
 		
 		return "hr/hr_list";
