@@ -22,8 +22,11 @@
 <p>Spring Framework 예제 입니다.</p>
 <ul>
 	<li><a href="member">회원 가입 화면</a></li>
+	<li><a href="board">게시판 예제</a></li>
 	<li><a href="daum/jsonp">jqgrid 예제- 다음 API를 사용(JSONP)</a></li>
 	<li><a href="hr/list">jqgrid 예제- 오라클 HR 사용, JSON 데이터로 변환</a></li>
+	<li><a href="hr/list/paging">jqgrid 예제- 오라클 HR 사용, JSON 데이터로 변환, Paging 구현</a></li>
+	<li><a href="daum/paging">jqgrid 예제- 페이징 처리</a></li>
 </ul>
 
 </body>

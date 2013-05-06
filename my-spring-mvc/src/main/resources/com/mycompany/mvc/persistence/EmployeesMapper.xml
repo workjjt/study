@@ -19,6 +19,22 @@
         <result property="departmentId" column="DEPARTMENT_ID" />
     </resultMap>
 
+	<select id="getTotalCount" resultType="int">
+		SELECT COUNT(*)
+		FROM EMPLOYEES
+	</select>
+	
+	<select id="getEmployeeList" parameterType="java.util.HashMap" resultMap="employeesResultMap">
+	<![CDATA[
+	SELECT * FROM (
+		SELECT ROWNUM AS RNUM, A.* FROM (
+			SELECT * FROM EMPLOYEES 
+		) A WHERE ROWNUM  <  #{endRow}
+	) WHERE RNUM > #{startRow}
+	ORDER BY ${sidx} ${sord}
+	]]>
+	</select>
+	
     <select id="findAll" resultMap="employeesResultMap">
 		SELECT
 		EMPLOYEE_ID,

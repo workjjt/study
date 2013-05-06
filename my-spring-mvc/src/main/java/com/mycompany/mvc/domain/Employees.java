@@ -3,6 +3,7 @@ package com.mycompany.mvc.domain;
 import java.util.Date;
 
 public class Employees {
+	int rnum;
 	int employeeId;
 	String firstName;
 	String lastName;
@@ -15,6 +16,15 @@ public class Employees {
 	int managerId;
 	int departmentId;
 
+	
+	public int getRnum() {
+		return rnum;
+	}
+
+	public void setRnum(int rnum) {
+		this.rnum = rnum;
+	}
+	
 	public int getEmployeeId() {
 		return employeeId;
 	}
@@ -105,11 +115,23 @@ public class Employees {
 
 	@Override
 	public String toString() {
-		return "employees [employeeId=" + employeeId + ", firstName="
-				+ firstName + ", lastName=" + lastName + ", email=" + email
-				+ ", phoneNumber=" + phoneNumber + ", hireDate=" + hireDate
-				+ ", jobId=" + jobId + ", salary=" + salary
-				+ ", commissionPct=" + commissionPct + ", managerId="
-				+ managerId + ", departmentId=" + departmentId + "]";
+		return "Employees [rnum=" + rnum + ", employeeId=" + employeeId
+				+ ", firstName=" + firstName + ", lastName=" + lastName
+				+ ", email=" + email + ", phoneNumber=" + phoneNumber
+				+ ", hireDate=" + hireDate + ", jobId=" + jobId + ", salary="
+				+ salary + ", commissionPct=" + commissionPct + ", managerId="
+				+ managerId + ", departmentId=" + departmentId + ", getRnum()="
+				+ getRnum() + ", getEmployeeId()=" + getEmployeeId()
+				+ ", getFirstName()=" + getFirstName() + ", getLastName()="
+				+ getLastName() + ", getEmail()=" + getEmail()
+				+ ", getPhoneNumber()=" + getPhoneNumber() + ", getHireDate()="
+				+ getHireDate() + ", getJobId()=" + getJobId()
+				+ ", getSalary()=" + getSalary() + ", getCommissionPct()="
+				+ getCommissionPct() + ", getManagerId()=" + getManagerId()
+				+ ", getDepartmentId()=" + getDepartmentId() + ", getClass()="
+				+ getClass() + ", hashCode()=" + hashCode() + ", toString()="
+				+ super.toString() + "]";
 	}
+
+
 }

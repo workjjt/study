@@ -21,7 +21,7 @@ public class DatabaseTester {
 		
 		EmployeesService employeesService = ctx.getBean("employeesService", EmployeesService.class);
 		
-		List<Employees> employees = employeesService.findAll();
+		List<Employees> employees = employeesService.getEmployeeList(1, 11, "FIRST_NAME", "asc");
 		
 		for (Employees employee: employees) {
 			System.out.println(employee);

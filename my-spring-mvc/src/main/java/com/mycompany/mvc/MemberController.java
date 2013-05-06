@@ -23,14 +23,14 @@ public class MemberController {
 	@RequestMapping(value = "/member", method = RequestMethod.GET)
 	public String actionMember(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("The Request URI is \'{}\'.", request.getRequestURI()); // '/mvc/member/add'
-		logger.info("The Request URI is \'{}\'.", request.getRequestURL()); // 'http://localhost:8088/mvc/member/add'
-		logger.info("\'{}\'.", request.getServletPath()); 
-		
-		Enumeration<String> em = request.getHeaderNames();
-		while (em.hasMoreElements()) {
-			String string = (String) em.nextElement();
-			System.out.println(string + " = " + request.getHeader(string));
-		}
+//		logger.info("The Request URI is \'{}\'.", request.getRequestURL()); // 'http://localhost:8088/mvc/member/add'
+//		logger.info("\'{}\'.", request.getServletPath()); 
+//		
+//		Enumeration<String> em = request.getHeaderNames();
+//		while (em.hasMoreElements()) {
+//			String string = (String) em.nextElement();
+//			System.out.println(string + " = " + request.getHeader(string));
+//		}
 		
 		return "member/member_add";
 	}

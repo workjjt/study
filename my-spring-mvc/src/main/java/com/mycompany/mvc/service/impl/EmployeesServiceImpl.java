@@ -1,9 +1,12 @@
 package com.mycompany.mvc.service.impl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
@@ -23,6 +26,30 @@ public class EmployeesServiceImpl implements EmployeesService {
 	@Autowired
 	private EmployeesMapper employeesMapper;
 	
+	@Override
+	public int getTotalCount() {
+		
+		int totalCount = employeesMapper.getTotalCount();
+		
+		return totalCount;
+	}
+	
+	@Override
+	public List<Employees> getEmployeeList(int startRow, int endRow, String sidx, String sord) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("startRow", String.valueOf(startRow));
+		map.put("endRow", String.valueOf(endRow));
+		map.put("sidx", sidx);
+		map.put("sord", sord);
+		
+		System.out.println(map);
+		
+		List<Employees> list = employeesMapper.getEmployeeList(map);
+		
+		return list;
+	}
+
 	
 	@Transactional(readOnly=true)
 	@Override
@@ -41,5 +68,4 @@ public class EmployeesServiceImpl implements EmployeesService {
 		
 		return employees;
 	}
-
 }
