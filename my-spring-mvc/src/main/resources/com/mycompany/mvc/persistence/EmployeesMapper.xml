@@ -28,10 +28,9 @@
 	<![CDATA[
 	SELECT * FROM (
 		SELECT ROWNUM AS RNUM, A.* FROM (
-			SELECT * FROM EMPLOYEES 
+			SELECT * FROM EMPLOYEES ORDER BY ${sidx} ${sord}
 		) A WHERE ROWNUM  <  #{endRow}
 	) WHERE RNUM > #{startRow}
-	ORDER BY ${sidx} ${sord}
 	]]>
 	</select>
 	
