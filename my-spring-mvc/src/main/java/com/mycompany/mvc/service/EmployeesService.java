@@ -8,6 +8,7 @@ public interface EmployeesService {
 	
 	public int getTotalCount();
 	public int getTotalCountAsSearch(String searchTarget, String searchWord);
+	public List<Employees> getEmployeeList(int startRow, int endRow, String sidx, String sord);
 	public List<Employees> getEmployeeList(int startRow, int endRow, String sidx, String sord, String searchTarget, String searchWord);
 	public List<Employees> findAll();
 	public Employees findById(int employeeId);

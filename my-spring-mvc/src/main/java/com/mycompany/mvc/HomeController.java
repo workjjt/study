@@ -72,7 +72,7 @@ public class HomeController {
 		String searchWord = "";		//검색어
 		
 		List<Employees> list;		//데이터 저장 리스트
-		System.out.println(request.getParameter("sidx"));
+		
 		if (request.getParameter("sidx") != null) {
 			sidx = request.getParameter("sidx");
 		}
@@ -157,20 +157,6 @@ public class HomeController {
 		model.addAttribute("list", list);
 		
 		return "board/board_list";
-	}
-	
-	@RequestMapping(value = "/daum/jsonp", method = RequestMethod.GET)
-	public String actionDaumApi(HttpServletRequest request) {
-		logger.info("The Request URI is \'{}\'.", request.getRequestURI());
-		
-		return "jqgrid/jqgrid_daum_api";
-	}
-	
-	@RequestMapping(value = "/daum/paging", method = RequestMethod.GET)
-	public String actionDaumBookApi(HttpServletRequest request) {
-		logger.info("The Request URI is \'{}\'.", request.getRequestURI());
-		
-		return "jqgrid/jqgrid_paging";
 	}
 	
 	//Default Value Collection

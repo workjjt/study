@@ -13,9 +13,9 @@ public interface EmployeesMapper {
 	
 	public List<Employees> findAll();
 	
-//	public List<Employees> getEmployeeList(@Param("startRow") int startRow, @Param("endRow") int endRow,
-//			@Param("sord") String sord, @Param("sidx") String sidx);
 	public List<Employees> getEmployeeList(HashMap<String, String> map);
+	
+	public List<Employees> getEmployeeListAsSearch(HashMap<String, String> map);
 	
 	public Employees findById(int employeeId);
 	

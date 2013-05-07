@@ -33,7 +33,7 @@ public class EmployeesServiceImpl implements EmployeesService {
 		
 		return totalCount;
 	}
-	
+		
 	@Override
 	public int getTotalCountAsSearch(String searchTarget, String searchWord) {
 		
@@ -49,6 +49,20 @@ public class EmployeesServiceImpl implements EmployeesService {
 	}
 	
 	@Override
+	public List<Employees> getEmployeeList(int startRow, int endRow, String sidx, String sord) {
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("startRow", String.valueOf(startRow));
+		map.put("endRow", String.valueOf(endRow));
+		map.put("sidx", sidx);
+		map.put("sord", sord);
+		
+		List<Employees> list = employeesMapper.getEmployeeList(map);
+		
+		return list;
+	}
+	
+	@Override
 	public List<Employees> getEmployeeList(int startRow, int endRow, String sidx, String sord, String searchTarget, String searchWord) {
 		
 		searchWord = "%" + searchWord + "%";
@@ -60,10 +74,8 @@ public class EmployeesServiceImpl implements EmployeesService {
 		map.put("sord", sord);
 		map.put("searchTarget", searchTarget);
 		map.put("searchWord", searchWord);
-		
-		System.out.println(map);
-		
-		List<Employees> list = employeesMapper.getEmployeeList(map);
+				
+		List<Employees> list = employeesMapper.getEmployeeListAsSearch(map);
 		
 		return list;
 	}
@@ -86,4 +98,6 @@ public class EmployeesServiceImpl implements EmployeesService {
 		
 		return employees;
 	}
+
+
 }

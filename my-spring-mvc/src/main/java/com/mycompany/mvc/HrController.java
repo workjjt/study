@@ -27,36 +27,17 @@ public class HrController {
 
 	@Autowired
 	private EmployeesService employeesService;
-
-	@RequestMapping(value = "/hr/list", method = RequestMethod.GET)
-	public String getHrList(Locale locale, Model model, HttpServletRequest request) {
-		logger.info("The Request URI is \'{}\'.", request.getRequestURI());
-
-		List<Employees> list =  employeesService.findAll();
-		
-		model.addAttribute("employees", list);
-		
-		return "hr/hr_list";
-	}
 	
-	@RequestMapping(value = "/hr/list/paging", method = RequestMethod.GET)
+	@RequestMapping(value = "/jqgrid/list", method = RequestMethod.GET)
 	public String actionHrListPaging(Locale locale, Model model, HttpServletRequest request) {
 		logger.info("The Request URI is \'{}\'.", request.getRequestURI());
 				
-		return "hr/hr_list_paging";
+		return "jqgrid/jqgrid_list_paging";
 	}
 	
-	@RequestMapping(value = "/hr/list/json", method = RequestMethod.GET)
-	public @ResponseBody List<Employees> getHrListAsJson(HttpServletRequest request) throws Exception {
-		logger.info("The Request URI is \'{}\'.", request.getRequestURI());
-
-		List<Employees> list =  employeesService.findAll();
-		
-		return list;
-	}
-	
-	@RequestMapping(value = "/hr/list/jsonp", method = RequestMethod.GET)
+	@RequestMapping(value = "/jqgrid/list/json", method = RequestMethod.GET)
 	public @ResponseBody JsonModel getHrListAsJsonTest(Model model, HttpServletRequest request) throws Exception {
+		
 		logger.info("The Request URI is \'{}\'.", request.getRequestURI());
 		
 		int totalCount = 0; //총 레코드 갯수
@@ -66,8 +47,8 @@ public class HrController {
 		int startRow = 0; //페이지의 시작글 번호
 		int endRow = 0; //페이지의 마지막 글 번호
 		
-		String searchWord = null;
-		String searchTarget = null;
+		String sidx = "employee_id";		//정렬 대상
+		String sord = "asc";				//정렬 방법
 		
 		Enumeration<String> em = request.getParameterNames();
 		
@@ -76,9 +57,12 @@ public class HrController {
 			System.out.println(string + " = " + request.getParameter(string));
 		}
 		
-		String sord = request.getParameter("sord");
-		String sidx = request.getParameter("sidx");
-		
+		if (request.getParameter("sidx") != null) {
+			sidx = request.getParameter("sidx");
+		}
+		if (request.getParameter("sord") != null) {
+			sord = request.getParameter("sord");
+		}
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
@@ -94,7 +78,7 @@ public class HrController {
 		System.out.println("currentPage = " + currentPage);
 		System.out.println(startRow + " : " + endRow );
 		
-		List<Employees> list =  employeesService.getEmployeeList(startRow, endRow, sidx, sord, searchTarget, searchWord);
+		List<Employees> list =  employeesService.getEmployeeList(startRow, endRow, sidx, sord);
 		
 		JsonModel jm = new JsonModel();
 		
