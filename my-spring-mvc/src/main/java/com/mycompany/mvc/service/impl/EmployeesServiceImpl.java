@@ -35,13 +35,31 @@ public class EmployeesServiceImpl implements EmployeesService {
 	}
 	
 	@Override
-	public List<Employees> getEmployeeList(int startRow, int endRow, String sidx, String sord) {
+	public int getTotalCountAsSearch(String searchTarget, String searchWord) {
+		
+		searchWord = "%" + searchWord + "%";
+		
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("searchTarget", searchTarget);
+		map.put("searchWord", searchWord);
+		
+		int totalCount = employeesMapper.getTotalCountAsSearch(map);
+		
+		return totalCount;
+	}
+	
+	@Override
+	public List<Employees> getEmployeeList(int startRow, int endRow, String sidx, String sord, String searchTarget, String searchWord) {
+		
+		searchWord = "%" + searchWord + "%";
 		
 		HashMap<String, String> map = new HashMap<String, String>();
 		map.put("startRow", String.valueOf(startRow));
 		map.put("endRow", String.valueOf(endRow));
 		map.put("sidx", sidx);
 		map.put("sord", sord);
+		map.put("searchTarget", searchTarget);
+		map.put("searchWord", searchWord);
 		
 		System.out.println(map);
 		

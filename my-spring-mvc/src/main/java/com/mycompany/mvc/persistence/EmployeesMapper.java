@@ -9,6 +9,8 @@ public interface EmployeesMapper {
 	
 	public int getTotalCount();
 	
+	public int getTotalCountAsSearch(HashMap<String, String> map);
+	
 	public List<Employees> findAll();
 	
 //	public List<Employees> getEmployeeList(@Param("startRow") int startRow, @Param("endRow") int endRow,

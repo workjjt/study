@@ -23,15 +23,25 @@
 		SELECT COUNT(*)
 		FROM EMPLOYEES
 	</select>
+	<select id="getTotalCountAsSearch" parameterType="java.util.HashMap" resultType="int">
+		SELECT COUNT(*)
+		FROM EMPLOYEES
+		WHERE ${searchTarget} LIKE #{searchWord}
+	</select>
 	
 	<select id="getEmployeeList" parameterType="java.util.HashMap" resultMap="employeesResultMap">
-	<![CDATA[
+	
 	SELECT * FROM (
 		SELECT ROWNUM AS RNUM, A.* FROM (
-			SELECT * FROM EMPLOYEES ORDER BY ${sidx} ${sord}
-		) A WHERE ROWNUM  <  #{endRow}
-	) WHERE RNUM > #{startRow}
-	]]>
+			SELECT * FROM EMPLOYEES 
+			<if test="searchWord != '' and searchTarget != ''">
+				WHERE ${searchTarget} LIKE #{searchWord}
+			</if>
+			ORDER BY ${sidx} ${sord}
+		) A WHERE ROWNUM  <![CDATA[ < ]]> #{endRow}
+	) WHERE RNUM <![CDATA[ > ]]> #{startRow}
+		
+	
 	</select>
 	
     <select id="findAll" resultMap="employeesResultMap">

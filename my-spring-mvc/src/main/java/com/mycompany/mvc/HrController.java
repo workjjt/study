@@ -66,6 +66,9 @@ public class HrController {
 		int startRow = 0; //페이지의 시작글 번호
 		int endRow = 0; //페이지의 마지막 글 번호
 		
+		String searchWord = null;
+		String searchTarget = null;
+		
 		Enumeration<String> em = request.getParameterNames();
 		
 		while (em.hasMoreElements()) {
@@ -91,7 +94,7 @@ public class HrController {
 		System.out.println("currentPage = " + currentPage);
 		System.out.println(startRow + " : " + endRow );
 		
-		List<Employees> list =  employeesService.getEmployeeList(startRow, endRow, sidx, sord);
+		List<Employees> list =  employeesService.getEmployeeList(startRow, endRow, sidx, sord, searchTarget, searchWord);
 		
 		JsonModel jm = new JsonModel();
 		

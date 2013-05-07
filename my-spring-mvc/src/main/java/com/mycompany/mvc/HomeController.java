@@ -68,6 +68,9 @@ public class HomeController {
 		String sidx = "employee_id";		//정렬 대상
 		String sord = "asc";				//정렬 방법
 		
+		String searchTarget = "";		//검색어
+		String searchWord = "";		//검색어
+		
 		List<Employees> list;		//데이터 저장 리스트
 		System.out.println(request.getParameter("sidx"));
 		if (request.getParameter("sidx") != null) {
@@ -79,11 +82,20 @@ public class HomeController {
 		if (request.getParameter("page") != null) {
 			currentPage = Integer.parseInt(request.getParameter("page"));
 		}
+		if (request.getParameter("search_target") != null) {
+			searchTarget = request.getParameter("search_target");
+		}
+		if (request.getParameter("search_word") != null) {
+			searchWord = request.getParameter("search_word");
+		}
 		
 		//--------------페이징 처리 부분----------------------------------------
 		//총 레코드(로우) 수
-		totalCount = employeesService.getTotalCount();
-		
+		if(searchWord != "" && searchTarget != ""){
+			totalCount = employeesService.getTotalCountAsSearch(searchTarget, searchWord);
+		}else{
+			totalCount = employeesService.getTotalCount();
+		}
 		//총 페이지 수
 		pageCount = totalCount / listSize + (totalCount % listSize > 0 ? 1 : 0);
 		if(currentPage > pageCount){ //현재 페이지는 총 페이지 수보다 클수 없다.
@@ -118,7 +130,7 @@ public class HomeController {
 		endRow = startRow + listSize + 1;
 		
 		// 데이터 가져오기
-		list = employeesService.getEmployeeList(startRow, endRow, sidx, sord);
+		list = employeesService.getEmployeeList(startRow, endRow, sidx, sord, searchTarget, searchWord);
 		
 		model.addAttribute("listSize", listSize);
 		model.addAttribute("pageSize", pageSize);
@@ -138,6 +150,9 @@ public class HomeController {
 		model.addAttribute("endRow", endRow);
 		
 		model.addAttribute("sidx", sidx);
+		
+		model.addAttribute("searchWord", searchWord);
+		model.addAttribute("searchTarget", searchTarget);
 		
 		model.addAttribute("list", list);
 		
